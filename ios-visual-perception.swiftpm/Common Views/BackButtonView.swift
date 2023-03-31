@@ -13,7 +13,7 @@ struct BackButtonView: View {
       HStack(spacing: 20) {
         Image.startButton
           .renderingMode(.template)
-          .rotationEffect(.degrees(.pi/2))
+          .rotationEffect(.radians(.pi))
           .foregroundColor(color)
         
         Text(Strings.Common.BackButton.back)
