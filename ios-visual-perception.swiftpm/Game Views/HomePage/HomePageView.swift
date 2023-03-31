@@ -6,6 +6,7 @@ import SwiftUI
 
 struct HomePageView: View {
   @State var isActive: Bool = false
+  @State var isPremiseVisible: Bool = true
   
   var body: some View {
     NavigationView {
@@ -43,6 +44,10 @@ struct HomePageView: View {
               Image.startButton
             }
           })
+        }
+        
+        if isPremiseVisible {
+          OrientationPremiseView(isVisible: $isPremiseVisible)
         }
       }
       .ignoresSafeArea()

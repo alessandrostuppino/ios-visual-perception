@@ -6,6 +6,12 @@ import Foundation
 
 struct Strings {
   struct Common {
+    struct OrientationPremise {
+      static let title = "Before starting..."
+      static let message = "Be sure to run the App on MacOS (Designed for iPad) or directly on iPad (simulator/physical) in portrait mode for a better experience!"
+      static let buttonText = "Gotcha!"
+    }
+    
     struct ResultPopup {
       static let correctTitle = "Right!"
       static let correctLeftButton = "GO TO READING"

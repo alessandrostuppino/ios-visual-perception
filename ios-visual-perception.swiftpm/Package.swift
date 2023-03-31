@@ -26,8 +26,7 @@ let package = Package(
                 .pad
             ],
             supportedInterfaceOrientations: [
-                .portrait,
-                .portraitUpsideDown(.when(deviceFamilies: [.pad]))
+                .portrait
             ]
         )
     ],
