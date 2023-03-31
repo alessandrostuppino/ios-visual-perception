@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "effect_gold_gradient.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
