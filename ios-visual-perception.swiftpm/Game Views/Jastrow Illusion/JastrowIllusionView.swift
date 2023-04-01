@@ -5,8 +5,11 @@
 import SwiftUI
 
 struct JastrowIllusionView: View {
-  @State private var location: CGPoint
-  @State var currentAngle: Angle = .degrees(0)
+  @State private var dragOffset: CGSize = .zero
+  @State private var position: CGSize
+  
+  @State var currentRotation: Angle = .zero
+  @GestureState private var twistAngle: Angle = .zero
   
   private let staticPieceWidth: CGFloat = GameManager.width
   private let staticPieceHeight: CGFloat = GameManager.height*(703/1194)
@@ -14,13 +17,27 @@ struct JastrowIllusionView: View {
   private let floatingPieceHeight: CGFloat = GameManager.height*(168.1/1194)
   
   init() {
-    location = CGPoint(
-      x: staticPieceWidth - floatingPieceWidth - GameManager.width * 0.085,
-      y: staticPieceHeight - floatingPieceHeight - GameManager.height * 0.371
-    )
+    position = CGSize(width: 6.5, height: 8)
   }
   
   var body: some View {
+    let rotationGesture = RotationGesture()
+      .updating($twistAngle) { value, state, _ in
+        state = value
+      }
+      .onEnded { value in
+        currentRotation += value
+      }
+    
+    let dragGesture = DragGesture()
+      .onChanged { value in
+        dragOffset = value.translation
+      }
+      .onEnded { value in
+        position += value.translation
+        dragOffset = .zero
+      }
+    
     ZStack {
       Image.Game.jastrowIllusionStatic
         .resizable()
@@ -31,21 +48,14 @@ struct JastrowIllusionView: View {
       Image.Game.jastrowIllusion
         .resizable()
         .scaledToFit()
-        .position(location)
-        .frame(width: floatingPieceWidth, height: floatingPieceHeight)
-        .rotationEffect(currentAngle)
-        .gesture(
-          DragGesture()
-            .onChanged { touch in
-              location = touch.location
-            })
-        .gesture(
-          RotationGesture()
-            .onChanged { angle in
-              currentAngle = angle
-            }
-            .onEnded { _ in }
+        .rotationEffect(currentRotation + twistAngle)
+        .offset(
+          x: (dragOffset + position).width,
+          y: (dragOffset + position).height
         )
+        .frame(width: floatingPieceWidth, height: floatingPieceHeight)
+        .gesture(dragGesture)
+        .gesture(rotationGesture)
       
     }
     .frame(width: staticPieceWidth, height: staticPieceHeight)

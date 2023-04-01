@@ -16,7 +16,7 @@ let package = Package(
         .iOSApplication(
             name: "Visual Perception",
             targets: ["AppModule"],
-            bundleIdentifier: "it.alessandrostuppino.visualPerception",
+            bundleIdentifier: "it.alessandrostuppino.iosVisualPerception",
             teamIdentifier: "SXN36U8GSW",
             displayVersion: "1.0",
             bundleVersion: "1",
