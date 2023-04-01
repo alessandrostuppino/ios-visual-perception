@@ -11,22 +11,6 @@ struct GameManager {
   static var gamesModel: [GameModel] = [
     GameModel(
       unlocked: true,
-      principleDescription: Strings.Game.JastrowIllusion.principleDescription,
-      gameDescription: Strings.Game.JastrowIllusion.gameDescription,
-      backgroundColor: Color(red: 236/255, green: 219/255, blue: 186/255),
-      type: .jastrowIllusion,
-      titleNumber: 11,
-      titlePrincipleName: Strings.Game.JastrowIllusion.titlePrincipleName,
-      instructionTitle: Strings.Game.JastrowIllusion.instructionTitle,
-      instructionParagraph: Strings.Game.JastrowIllusion.instructionParagraph,
-      instructionCheckboxes: [
-        CheckboxModel(index: 0, correct: false, description: Strings.Game.JastrowIllusion.opt1),
-        CheckboxModel(index: 1, correct: true, description: Strings.Game.JastrowIllusion.opt2),
-        CheckboxModel(index: 2, correct: false, description: Strings.Game.JastrowIllusion.opt3)
-      ]
-    ),
-    GameModel(
-      unlocked: true,
       principleDescription: Strings.Game.ProximityPrinciple.principleDescription,
       gameDescription: Strings.Game.ProximityPrinciple.gameDescription,
       backgroundColor: Color(red: 208/255, green: 98/255, blue: 36/255),
@@ -169,6 +153,21 @@ struct GameManager {
         CheckboxModel(index: 0, correct: true, description: Strings.Game.PonzoIllusion.opt1),
         CheckboxModel(index: 1, correct: false, description: Strings.Game.PonzoIllusion.opt2),
         CheckboxModel(index: 2, correct: false, description: Strings.Game.PonzoIllusion.opt3)
+      ]
+    ),
+    GameModel(
+      principleDescription: Strings.Game.JastrowIllusion.principleDescription,
+      gameDescription: Strings.Game.JastrowIllusion.gameDescription,
+      backgroundColor: Color(red: 236/255, green: 219/255, blue: 186/255),
+      type: .jastrowIllusion,
+      titleNumber: 11,
+      titlePrincipleName: Strings.Game.JastrowIllusion.titlePrincipleName,
+      instructionTitle: Strings.Game.JastrowIllusion.instructionTitle,
+      instructionParagraph: Strings.Game.JastrowIllusion.instructionParagraph,
+      instructionCheckboxes: [
+        CheckboxModel(index: 0, correct: false, description: Strings.Game.JastrowIllusion.opt1),
+        CheckboxModel(index: 1, correct: true, description: Strings.Game.JastrowIllusion.opt2),
+        CheckboxModel(index: 2, correct: false, description: Strings.Game.JastrowIllusion.opt3)
       ]
     ),
     GameModel(

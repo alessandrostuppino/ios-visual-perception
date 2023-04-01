@@ -17,7 +17,7 @@ struct JastrowIllusionView: View {
   private let floatingPieceHeight: CGFloat = GameManager.height*(168.1/1194)
   
   init() {
-    position = CGSize(width: 6.5, height: 8)
+    position = CGSize(width: 5.34, height: 6.77)
   }
   
   var body: some View {

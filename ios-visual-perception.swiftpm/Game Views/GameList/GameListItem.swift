@@ -10,71 +10,61 @@ struct GameListItem: View {
   @State private var showDetail = false
   
   var body: some View {
-    ZStack {
-      NavigationLink(isActive: $showDetail) {
-        DescriptionDetailView(model: model)
-      } label: {
-        EmptyView()
-      }
+    VStack(spacing: 20) {
+      cover
       
-      VStack(spacing: 20) {
-        if model.unlocked {
-          NavigationLink {
-            GameContainerView(model)
-              .navigationViewStyle(.stack)
-              .navigationBarHidden(true)
-              .navigationBarBackButtonHidden(true)
-          } label: {
-            cover
-          }
-        } else {
-          cover
-        }
+      HStack {
+        Text(model.titlePrincipleName)
+          .customFont(CustomFont.commissioner.regular, size: 21)
+          .foregroundColor(.white)
         
-        HStack {
-          Text(model.titlePrincipleName)
-            .customFont(CustomFont.commissioner.regular, size: 21)
-            .foregroundColor(.white)
-          
-          Spacer(minLength: 70)
-          
-          Button {
-            showDetail = true
-          } label: {
-            Circle()
-              .fill(
-                model.unlocked
-                ? Color(red: 120/255, green: 69/255, blue: 191/255)
-                : Color(red: 242/255, green: 242/255, blue: 242/255)
-              )
-              .frame(width: 60, height: 60)
-              .overlay {
-                Image.descriptionDetail
-                  .renderingMode(.template)
-                  .resizable()
-                  .scaledToFit()
-                  .frame(height: 25)
-                  .foregroundColor(
-                    model.unlocked
-                    ? Color.white
-                    : Color(red: 176/255, green: 176/255, blue: 176/255)
-                  )
-              }
-          }
-          .disabled(!model.unlocked)
-        }
+        Spacer(minLength: 70)
+        
+        detail
       }
     }
   }
   
   var cover: some View {
+    if model.unlocked {
+      return AnyView(
+        NavigationLink {
+          GameContainerView(model)
+        } label: {
+          coverImage(disabled: false)
+        }
+      )
+    } else {
+      return AnyView(
+        coverImage(disabled: true)
+      )
+    }
+  }
+  
+  var detail: some View {
+    if model.unlocked {
+      return AnyView(
+        NavigationLink(isActive: $showDetail) {
+          DescriptionDetailView(model: model)
+        } label: {
+          detailButton(disabled: false)
+        }
+      )
+    } else {
+      return AnyView(
+        detailButton(disabled: true)
+      )
+    }
+  }
+  
+  @ViewBuilder func coverImage(disabled: Bool) -> some View {
     Image(model.cover)
       .resizable()
       .scaledToFit()
       .frame(width: coverWidth, height: coverWidth)
-      .blur(radius: model.unlocked ? 0 : 5, opaque: true)
+      .blur(radius: disabled ? 5 : .zero, opaque: true)
       .overlay {
-        if !model.unlocked {
+        if disabled {
           ZStack {
             Color.black
               .opacity(0.25)
@@ -87,6 +77,35 @@ struct GameListItem: View {
           .frame(width: coverWidth, height: coverWidth)
         }
       }
+  }
+  
+  @ViewBuilder func detailButton(disabled: Bool) -> some View {
+    Button {
+      if !disabled {
+        showDetail = true
+      }
+    } label: {
+      Circle()
+        .fill(
+          model.unlocked
+          ? Color(red: 120/255, green: 69/255, blue: 191/255)
+          : Color(red: 242/255, green: 242/255, blue: 242/255)
+        )
+        .frame(width: 60, height: 60)
+        .overlay {
+          Image.descriptionDetail
+            .renderingMode(.template)
+            .resizable()
+            .scaledToFit()
+            .frame(height: 25)
+            .foregroundColor(
+              model.unlocked
+              ? Color.white
+              : Color(red: 176/255, green: 176/255, blue: 176/255)
+            )
+        }
+    }
+    .disabled(disabled)
   }
 }
 
