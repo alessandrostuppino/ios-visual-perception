@@ -30,11 +30,11 @@ enum CustomFont: String, CaseIterable {
   case commissioner = "Commissioner"
   case fraunces = "Fraunces"
   
-  var black: String { self.rawValue + "-Black" }
-  var bold: String { self.rawValue + "-Bold" }
-  var extraBold: String { self.rawValue + "-ExtraBold" }
-  var light: String { self.rawValue + "-Light" }
-  var medium: String { self.rawValue + "-Medium" }
-  var regular: String { self.rawValue }
-  var semibold: String { self.rawValue + "-SemiBold" }
+  var black: String { rawValue + "-Black" }
+  var bold: String { rawValue + "-Bold" }
+  var extraBold: String { rawValue + "-ExtraBold" }
+  var light: String { rawValue + "-Light" }
+  var medium: String { rawValue + "-Medium" }
+  var regular: String { rawValue }
+  var semibold: String { rawValue + "-SemiBold" }
 }

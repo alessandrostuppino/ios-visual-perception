@@ -32,3 +32,25 @@ struct DragRelocateDelegate: DropDelegate {
     return true
   }
 }
+
+// MARK: Draggable View Modifier
+
+struct Draggable: ViewModifier {
+  let condition: Bool
+  let data: () -> NSItemProvider
+  
+  @ViewBuilder
+  func body(content: Content) -> some View {
+    if condition {
+      content.onDrag(data)
+    } else {
+      content
+    }
+  }
+}
+
+extension View {
+  public func onDrag(if condition: Bool, _ data: @escaping () -> NSItemProvider) -> some View {
+    self.modifier(Draggable(condition: condition, data: data))
+  }
+}

@@ -32,18 +32,18 @@ struct HomePageView: View {
             .foregroundColor(.lightBlack)
             .padding(30)
           
-          NavigationLink(destination: GamesListView()
-            .navigationViewStyle(.stack)
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true),
-                         isActive: $isActive, label: {
-            HStack(spacing: 30) {
-              Text(Strings.Common.HomePage.start)
-                .customFont(CustomFont.fraunces.regular, size: 40)
-                .foregroundColor(.lightBlack)
-              Image.startButton
-            }
-          })
+          HStack(spacing: 30) {
+            Text(Strings.Common.HomePage.start)
+              .customFont(CustomFont.fraunces.regular, size: 40)
+              .foregroundColor(.lightBlack)
+            Image.startButton
+          }
+          .navigationLink($isActive) {
+            GamesListView()
+              .navigationViewStyle(.stack)
+              .navigationBarHidden(true)
+              .navigationBarBackButtonHidden(true)
+          }
         }
         
         if isPremiseVisible {
