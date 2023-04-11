@@ -21,34 +21,34 @@ enum GameViewType: String {
   
   case goalGradientIllusion = "effect_gold_gradient"
   
-  @ViewBuilder func view(_ win: Binding<Bool>) -> some View {
+  func view(_ win: Binding<Bool>) -> AnyView {
     switch self {
     case .proximityPrinciple:
-      ProximityPrincipleView(won: win)
+      return AnyView(ProximityPrincipleView(won: win))
     case .similarityPrinciple:
-      GenericPrincipleView(image: Image.Game.similarityPrinciple)
+      return AnyView(GenericPrincipleView(image: Image.Game.similarityPrinciple))
     case .commonFatePrinciple:
-      GenericPrincipleView(image: Image.Game.commonFatePrinciple)
+      return AnyView(GenericPrincipleView(image: Image.Game.commonFatePrinciple))
     case .continuityPrinciple:
-      ContinuityPrincipleView()
+      return AnyView(ContinuityPrincipleView())
     case .pastExperiencePrinciple:
-      GenericPrincipleView(image: Image.Game.pastExperiencePrinciple)
+      return AnyView(GenericPrincipleView(image: Image.Game.pastExperiencePrinciple))
     case .closurePrinciple:
-      GenericPrincipleView(image: Image.Game.closurePrinciple)
+      return AnyView(GenericPrincipleView(image: Image.Game.closurePrinciple))
     case .figureGroundPrinciple:
-      GenericPrincipleView(image: Image.Game.figureGroundPrinciple)
+      return AnyView(GenericPrincipleView(image: Image.Game.figureGroundPrinciple))
     case .angleIllusion:
-      GenericIllusionView(image: Image.Game.angleIllusion, solutionImage: Image.Game.angleIllusionEmpty)
+      return AnyView(GenericIllusionView(image: Image.Game.angleIllusion, solutionImage: Image.Game.angleIllusionEmpty))
     case .mullerLyerIllusion:
-      GenericIllusionView(image: Image.Game.mullerLyerIllusion, solutionImage: Image.Game.mullerLyerIllusionEmpty)
+      return AnyView(GenericIllusionView(image: Image.Game.mullerLyerIllusion, solutionImage: Image.Game.mullerLyerIllusionEmpty))
     case .ponzoIllusion:
-      GenericIllusionView(image: Image.Game.ponzoIllusion, solutionImage: Image.Game.ponzoIllusionEmpty)
+      return AnyView(GenericIllusionView(image: Image.Game.ponzoIllusion, solutionImage: Image.Game.ponzoIllusionEmpty))
     case .jastrowIllusion:
-      JastrowIllusionView()
+      return AnyView(JastrowIllusionView())
     case .impossibleTridentIllusion:
-      GenericPrincipleView(image: Image.Game.impossibleTrident)
+      return AnyView(GenericPrincipleView(image: Image.Game.impossibleTrident))
     case .goalGradientIllusion:
-      GenericPrincipleView(image: Image.Game.goalGradientEffect)
+      return AnyView(GenericPrincipleView(image: Image.Game.goalGradientEffect))
     }
   }
 }

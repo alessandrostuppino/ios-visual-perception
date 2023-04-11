@@ -19,9 +19,9 @@ struct InstructionsView: View {
     VStack {
       Spacer()
       ZStack {
-        detailViewLink
-        nextGameLink
-        congratsLink
+        detailViewNavigationLink
+        nextGameNavigationLink
+        congratsNavigationLink
         
         Rectangle()
           .fill(Color.vintage)
@@ -79,9 +79,7 @@ struct InstructionsView: View {
     }
   }
   
-  // MARK: - Private Helpers
-  
-  private var resultPopup: some View {
+  var resultPopup: some View {
     ResultPopupView(model.win, presented: $shouldPresent) {
       if model.win {
         showDetail = true
@@ -105,25 +103,28 @@ struct InstructionsView: View {
     }
   }
   
-  private var detailViewLink: some View {
-    EmptyView()
-      .navigationLink($showDetail) {
-        DescriptionDetailView(model: model)
-      }
+  var detailViewNavigationLink: some View {
+    NavigationLink(isActive: $showDetail) {
+      DescriptionDetailView(model: model)
+    } label: {
+      EmptyView()
+    }
   }
   
-  private var nextGameLink: some View {
-    EmptyView()
-      .navigationLink($showNextGame) {
-        GameContainerView(model)
-      }
+  var nextGameNavigationLink: some View {
+    NavigationLink(isActive: $showNextGame) {
+      GameContainerView(model)
+    } label: {
+      EmptyView()
+    }
   }
   
-  private var congratsLink: some View {
-    EmptyView()
-      .navigationLink($showCongrats) {
-        CongratulationsView()
-      }
+  var congratsNavigationLink: some View {
+    NavigationLink(isActive: $showCongrats) {
+      CongratulationsView()
+    } label: {
+      EmptyView()
+    }
   }
 }
 

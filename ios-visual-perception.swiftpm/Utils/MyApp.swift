@@ -6,6 +6,7 @@ import SwiftUI
 
 @main
 struct MyApp: App {
+  
   init() {
     VisualPerception.registerFonts()
   }

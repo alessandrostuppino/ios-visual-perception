@@ -14,11 +14,8 @@ struct ProximityPrincipleView: View {
   
   @StateObject private var model: DotsModel = DotsModel()
   @State private var dragging: DraggableDot?
-  @Binding private var won: Bool
   
-  init(won: Binding<Bool>) {
-    self._won = won
-  }
+  @Binding var won: Bool
   
   var body: some View {
     ZStack {
@@ -52,9 +49,7 @@ struct ProximityPrincipleView: View {
     }
   }
   
-  // MARK: - Private Helpers
-  
-  private func checkIfWin() {
+  func checkIfWin() {
     let winning = model.winningCombination()
     won = false
     

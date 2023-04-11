@@ -11,7 +11,7 @@ struct GameListItem: View {
   
   var body: some View {
     VStack(spacing: 20) {
-      cover()
+      cover
       
       HStack {
         Text(model.titlePrincipleName)
@@ -20,36 +20,44 @@ struct GameListItem: View {
         
         Spacer(minLength: 70)
         
-        detail()
+        detail
       }
     }
   }
   
-  // MARK: - Private Helpers
-  
-  @ViewBuilder private func cover() -> some View {
+  var cover: some View {
     if model.unlocked {
-      coverImage(disabled: false)
-        .navigationLink {
+      return AnyView(
+        NavigationLink {
           GameContainerView(model)
+        } label: {
+          coverImage(disabled: false)
         }
+      )
     } else {
-      coverImage(disabled: true)
+      return AnyView(
+        coverImage(disabled: true)
+      )
     }
   }
   
-  @ViewBuilder private func detail() -> some View {
+  var detail: some View {
     if model.unlocked {
-      detailButton(disabled: false)
-        .navigationLink($showDetail) {
+      return AnyView(
+        NavigationLink(isActive: $showDetail) {
           DescriptionDetailView(model: model)
+        } label: {
+          detailButton(disabled: false)
         }
+      )
     } else {
-      detailButton(disabled: true)
+      return AnyView(
+        detailButton(disabled: true)
+      )
     }
   }
   
-  @ViewBuilder private func coverImage(disabled: Bool) -> some View {
+  @ViewBuilder func coverImage(disabled: Bool) -> some View {
     Image(model.cover)
       .resizable()
       .scaledToFit()
@@ -71,7 +79,7 @@ struct GameListItem: View {
       }
   }
   
-  @ViewBuilder private func detailButton(disabled: Bool) -> some View {
+  @ViewBuilder func detailButton(disabled: Bool) -> some View {
     Button {
       if !disabled {
         showDetail = true
